@@ -88,7 +88,7 @@ export default function EasterEggNotification({ onShake }: Props) {
   const [badge, setBadge] = useState(1);
   const visibleRef = useRef(false);
   const usedIndices = useRef<Set<number>>(new Set());
-  const dismissTimer = useRef<ReturnType<typeof setTimeout>>();
+  const dismissTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const pickMessage = useCallback(() => {
     if (usedIndices.current.size >= MESSAGES.length) usedIndices.current.clear();

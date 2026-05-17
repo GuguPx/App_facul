@@ -8,7 +8,7 @@ interface Props {
 
 export default function PhoneFrame({ children }: Props) {
   const [shake, setShake] = useState(false);
-  const shakeTimer = useRef<ReturnType<typeof setTimeout>>();
+  const shakeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const handleShake = useCallback(() => {
     clearTimeout(shakeTimer.current);
