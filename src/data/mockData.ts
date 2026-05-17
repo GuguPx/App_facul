@@ -1,0 +1,198 @@
+export const mockUser = {
+  name: 'Maria Silva',
+  cpf: '***.***.***-45',
+  cidade: 'São Paulo, SP',
+  avatar: 'MS',
+  nivel: 'Cidadão Ativo',
+  pontos: 1240,
+  participacoes: 18,
+  manifestacoes: 7,
+  badges: [
+    { id: 1, nome: 'Primeiro Voto', icon: '🗳️', cor: '#4CAF50' },
+    { id: 2, nome: 'Engajado', icon: '⭐', cor: '#FF9800' },
+    { id: 3, nome: 'Educado', icon: '📚', cor: '#9C27B0' },
+    { id: 4, nome: 'Vigilante', icon: '🔍', cor: '#2196F3' },
+  ],
+};
+
+export const mockStats = {
+  demandasResolvidas: 1247,
+  participacaoCidada: 8934,
+  unidadesMonitoradas: 312,
+  satisfacaoMedia: 4.2,
+};
+
+export const mockManifestacoes = [
+  {
+    id: 1,
+    protocolo: 'SUS-2024-001847',
+    titulo: 'Falta de medicamentos na UBS Jabaquara',
+    categoria: 'Falta de insumos',
+    unidade: 'UBS Jabaquara',
+    data: '15/11/2024',
+    status: 'Resolvido',
+    descricao: 'A unidade estava sem medicamentos para pressão arterial há mais de 2 semanas.',
+  },
+  {
+    id: 2,
+    protocolo: 'SUS-2024-002156',
+    titulo: 'Demora no atendimento - UPA Sacomã',
+    categoria: 'Tempo de espera',
+    unidade: 'UPA Sacomã',
+    data: '02/12/2024',
+    status: 'Em análise',
+    descricao: 'Tempo de espera superior a 6 horas para atendimento de urgência.',
+  },
+  {
+    id: 3,
+    protocolo: 'SUS-2024-002891',
+    titulo: 'Elogio: Atendimento exemplar na UBS Vila Mariana',
+    categoria: 'Elogio',
+    unidade: 'UBS Vila Mariana',
+    data: '10/12/2024',
+    status: 'Recebido',
+    descricao: 'Equipe muito atenciosa e profissional. Serviço de qualidade.',
+  },
+  {
+    id: 4,
+    protocolo: 'SUS-2024-003012',
+    titulo: 'Equipamento com defeito no Laboratório Central',
+    categoria: 'Infraestrutura',
+    unidade: 'Laboratório Central',
+    data: '18/12/2024',
+    status: 'Em análise',
+    descricao: 'Aparelho de raio-x apresentando falhas há 3 dias.',
+  },
+];
+
+export const mockUnidades = [
+  'UBS Jabaquara',
+  'UBS Vila Mariana',
+  'UBS Saúde',
+  'UPA Sacomã',
+  'UPA Sul',
+  'Hospital das Clínicas',
+  'Hospital do Servidor Público',
+  'AMA Interlagos',
+  'AMA Santo André',
+  'Centro de Saúde Glicério',
+  'Laboratório Central',
+  'CAPS Centro',
+];
+
+export const mockCategorias = [
+  'Falta de insumos',
+  'Tempo de espera',
+  'Infraestrutura',
+  'Atendimento inadequado',
+  'Limpeza e higiene',
+  'Agendamento',
+  'Medicamentos',
+  'Elogio',
+  'Sugestão de melhoria',
+  'Outros',
+];
+
+export const mockConteudos = [
+  {
+    id: 1,
+    titulo: 'O que é o SUS?',
+    subtitulo: 'Sistema Único de Saúde',
+    icon: '🏥',
+    cor: '#1565C0',
+    duracao: '5 min',
+    progresso: 80,
+    descricao: 'O SUS é o sistema de saúde pública do Brasil, criado pela Constituição de 1988. Oferece atendimento gratuito e universal a todos os cidadãos brasileiros, sendo um dos maiores sistemas de saúde pública do mundo.',
+    topicos: ['Histórico do SUS', 'Princípios fundamentais', 'Estrutura organizacional', 'Financiamento'],
+  },
+  {
+    id: 2,
+    titulo: 'Direitos do Cidadão',
+    subtitulo: 'Conheça seus direitos na saúde',
+    icon: '⚖️',
+    cor: '#4CAF50',
+    duracao: '8 min',
+    progresso: 45,
+    descricao: 'Todo cidadão tem direito ao atendimento gratuito, humanizado e de qualidade no SUS. Conheça como exercer seus direitos e onde recorrer.',
+    topicos: ['Direito ao atendimento', 'Prontuário médico', 'Escolha de profissional', 'Reclamações'],
+  },
+  {
+    id: 3,
+    titulo: 'Participação Popular',
+    subtitulo: 'Sua voz faz diferença',
+    icon: '🗣️',
+    cor: '#FF9800',
+    duracao: '6 min',
+    progresso: 20,
+    descricao: 'A participação da população é fundamental para melhorar o SUS. Aprenda como participar dos conselhos de saúde e conferências.',
+    topicos: ['Conselhos de Saúde', 'Conferências', 'Ouvidoria', 'Manifestações'],
+  },
+  {
+    id: 4,
+    titulo: 'Conselhos de Saúde',
+    subtitulo: 'Controle social em ação',
+    icon: '👥',
+    cor: '#9C27B0',
+    duracao: '7 min',
+    progresso: 0,
+    descricao: 'Os Conselhos de Saúde são órgãos colegiados de caráter permanente e deliberativo. Saiba como participar e influenciar as políticas de saúde.',
+    topicos: ['O que são conselhos', 'Como participar', 'Próximas reuniões', 'Deliberações recentes'],
+  },
+];
+
+export const mockQuiz = {
+  pergunta: 'O SUS foi criado em qual ano?',
+  opcoes: ['1980', '1985', '1988', '1990'],
+  correta: 2,
+  explicacao: 'O Sistema Único de Saúde foi criado pela Constituição Federal de 1988, no artigo 196.',
+};
+
+export const mockEnquetes = [
+  {
+    id: 1,
+    pergunta: 'O atendimento do SUS na sua cidade melhorou nos últimos 6 meses?',
+    totalVotos: 3847,
+    opcoes: [
+      { texto: 'Sim, melhorou muito', votos: 1124, cor: '#4CAF50' },
+      { texto: 'Sim, melhorou um pouco', votos: 892, cor: '#8BC34A' },
+      { texto: 'Continua igual', votos: 1205, cor: '#FF9800' },
+      { texto: 'Piorou', votos: 626, cor: '#F44336' },
+    ],
+    encerramento: '31/12/2024',
+    ativa: true,
+  },
+  {
+    id: 2,
+    pergunta: 'Você já utilizou algum serviço de telemedicina pelo SUS?',
+    totalVotos: 2156,
+    opcoes: [
+      { texto: 'Sim, e foi ótimo', votos: 432, cor: '#4CAF50' },
+      { texto: 'Sim, mas tive problemas', votos: 218, cor: '#FF9800' },
+      { texto: 'Não, mas tenho interesse', votos: 987, cor: '#2196F3' },
+      { texto: 'Não tenho interesse', votos: 519, cor: '#9E9E9E' },
+    ],
+    encerramento: '15/01/2025',
+    ativa: true,
+  },
+  {
+    id: 3,
+    pergunta: 'Qual área da saúde pública precisa de mais investimento?',
+    totalVotos: 5621,
+    opcoes: [
+      { texto: 'Atenção Básica', votos: 2247, cor: '#1565C0' },
+      { texto: 'Urgência e Emergência', votos: 1687, cor: '#F44336' },
+      { texto: 'Saúde Mental', votos: 1124, cor: '#9C27B0' },
+      { texto: 'Medicamentos', votos: 563, cor: '#FF9800' },
+    ],
+    encerramento: '20/01/2025',
+    ativa: false,
+  },
+];
+
+export const mockTimeline = [
+  { status: 'Recebido', descricao: 'Manifestação recebida pelo sistema', hora: '09:32', concluido: true },
+  { status: 'Em análise', descricao: 'Encaminhado para a secretaria responsável', hora: '11:15', concluido: true },
+  { status: 'Processando', descricao: 'Análise em andamento pela equipe técnica', hora: '14:00', concluido: false },
+  { status: 'Resposta', descricao: 'Aguardando retorno do gestor', hora: '--', concluido: false },
+  { status: 'Resolvido', descricao: 'Manifestação encerrada', hora: '--', concluido: false },
+];
