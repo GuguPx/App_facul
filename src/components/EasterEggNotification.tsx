@@ -113,9 +113,9 @@ export default function EasterEggNotification({ onShake }: Props) {
   }, [onShake, pickMessage]);
 
   useEffect(() => {
-    // A cada 8s sorteia entre 2–7% de chance de exibir
+    // A cada 8s sorteia 50% de chance de exibir
     const interval = setInterval(() => {
-      const chance = 0.02 + Math.random() * 0.05;
+      const chance = 0.5;
       if (Math.random() < chance) show();
     }, 8000);
 
