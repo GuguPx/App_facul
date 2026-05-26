@@ -113,11 +113,11 @@ export default function EasterEggNotification({ onShake }: Props) {
   }, [onShake, pickMessage]);
 
   useEffect(() => {
-    // A cada 8s sorteia 50% de chance de exibir
+    // A cada 3min sorteia 50% de chance de exibir (~6min de média)
     const interval = setInterval(() => {
       const chance = 0.5;
       if (Math.random() < chance) show();
-    }, 8000);
+    }, 180000);
 
     let count = 0;
     let resetTimer: ReturnType<typeof setTimeout> | undefined;

@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiArrowLeft, HiSearch, HiPlus } from 'react-icons/hi';
 import StatusBar from '../components/StatusBar';
 import BottomNav from '../components/BottomNav';
+import PaginationControls from '../components/PaginationControls';
+import { ITEMS_PER_PAGE } from '../constants/pagination';
 import { mockManifestacoes, mockTimeline } from '../data/mockData';
 
 const statusConfig: Record<string, { bg: string; text: string; dot: string }> = {
@@ -18,9 +20,27 @@ export default function ManifestacoesScreen() {
   const navigate = useNavigate();
   const [tab, setTab] = useState('Todas');
   const [selected, setSelected] = useState<number | null>(null);
+  const [search, setSearch] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const filtered = tab === 'Todas' ? mockManifestacoes : mockManifestacoes.filter((m) => m.status === tab);
+  const normalizedSearch = search.trim().toLowerCase();
+  const filteredByTab = tab === 'Todas' ? mockManifestacoes : mockManifestacoes.filter((m) => m.status === tab);
+  const filtered = filteredByTab.filter((m) => {
+    if (!normalizedSearch) return true;
+    return m.titulo.toLowerCase().includes(normalizedSearch) || m.protocolo.toLowerCase().includes(normalizedSearch);
+  });
+  const totalPages = Math.max(1, Math.ceil(filtered.length / ITEMS_PER_PAGE));
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const paginatedManifestacoes = filtered.slice(startIndex, startIndex + ITEMS_PER_PAGE);
   const detail = mockManifestacoes.find((m) => m.id === selected);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [tab, search]);
+
+  useEffect(() => {
+    if (currentPage > totalPages) setCurrentPage(totalPages);
+  }, [currentPage, totalPages]);
 
   return (
     <div className="absolute inset-0 flex flex-col bg-gray-50 overflow-hidden">
