@@ -71,6 +71,8 @@ export default function ManifestacoesScreen() {
           <div className="relative mb-4">
             <HiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
             <input placeholder="Buscar por título ou protocolo..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               className="w-full pl-10 pr-4 py-3 rounded-2xl border-2 border-gray-200 text-sm text-gray-700 outline-none bg-white" />
           </div>
 
@@ -92,7 +94,7 @@ export default function ManifestacoesScreen() {
 
           {/* List */}
           <AnimatePresence mode="popLayout">
-            {filtered.map((m, i) => {
+            {paginatedManifestacoes.map((m, i) => {
               const sc = statusConfig[m.status] ?? statusConfig['Recebido'];
               return (
                 <motion.div
@@ -132,6 +134,12 @@ export default function ManifestacoesScreen() {
               );
             })}
           </AnimatePresence>
+
+          <PaginationControls
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
 
           <div className="h-4" />
         </div>
