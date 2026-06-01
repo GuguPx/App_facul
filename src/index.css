@@ -10,7 +10,7 @@
     margin: 0;
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #0f0f1a;
+    background: #071D41;
     min-height: 100vh;
     overflow: hidden;
   }
@@ -21,7 +21,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(ellipse at center, #1a1a2e 0%, #0f0f1a 70%);
+    background: linear-gradient(160deg, #071D41 0%, #0C326F 55%, #1351B4 100%);
   }
 }
 
@@ -33,10 +33,10 @@
     border-radius: 50px;
     overflow: hidden;
     box-shadow:
-      0 0 0 2px #2a2a3e,
-      0 0 0 6px #1a1a2e,
-      0 40px 100px rgba(0,0,0,0.9),
-      0 0 80px rgba(21, 101, 192, 0.2);
+      0 0 0 2px #C8CDD6,
+      0 0 0 6px #9BA3AF,
+      0 40px 100px rgba(0,0,0,0.7),
+      0 0 60px rgba(19, 81, 180, 0.25);
     background: #fff;
     flex-shrink: 0;
   }

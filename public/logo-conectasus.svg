@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 410" fill="none">
+  <defs>
+    <linearGradient id="gA" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4ADE80"/>
+      <stop offset="100%" stop-color="#16A34A"/>
+    </linearGradient>
+    <linearGradient id="gB" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#42A5F5"/>
+    </linearGradient>
+    <linearGradient id="gC" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22C55E"/>
+      <stop offset="100%" stop-color="#1976D2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Circular arcs — circle center (210,195) R=160 -->
+  <!-- Green arc: from top (210,35) CCW through left side to lower-left (71,275) -->
+  <path d="M 210,35 A 160,160 0 0,0 71,275"
+    stroke="url(#gA)" stroke-width="13" fill="none" stroke-linecap="round"/>
+  <!-- Blue arc: from top (210,35) CW through right side to lower-right (349,275) -->
+  <path d="M 210,35 A 160,160 0 0,1 349,275"
+    stroke="url(#gB)" stroke-width="13" fill="none" stroke-linecap="round"/>
+
+  <!-- Arc endpoint dots -->
+  <circle cx="210" cy="35"  r="9" fill="#22C55E"/>
+  <circle cx="71"  cy="275" r="9" fill="#16A34A"/>
+  <circle cx="349" cy="275" r="9" fill="#1565C0"/>
+
+  <!-- Medical cross centered at (210,185) -->
+  <!-- Vertical bar -->
+  <rect x="186" y="102" width="48" height="166" rx="10" fill="url(#gC)"/>
+  <!-- Horizontal bar -->
+  <rect x="132" y="161" width="156" height="48" rx="10" fill="url(#gC)"/>
+
+  <!-- ECG / heartbeat line across horizontal bar -->
+  <polyline
+    points="148,185 168,185 178,163 190,208 202,143 214,208 226,185 292,185"
+    stroke="white" stroke-width="4.5" fill="none"
+    stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Left person (green) -->
+  <circle cx="103" cy="248" r="20" fill="#22C55E"/>
+  <path d="M 76,300 Q 103,274 130,300 L 123,328 H 83 Z" fill="#22C55E"/>
+
+  <!-- Right person (blue) -->
+  <circle cx="317" cy="248" r="20" fill="#1565C0"/>
+  <path d="M 290,300 Q 317,274 344,300 L 337,328 H 297 Z" fill="#1565C0"/>
+
+  <!-- Heart at bottom center -->
+  <path d="M 210,390
+    C 210,390 161,359 145,336
+    C 129,314 145,289 167,289
+    C 182,289 196,303 210,320
+    C 224,303 238,289 253,289
+    C 275,289 291,314 275,336
+    C 259,359 210,390 210,390 Z"
+    fill="url(#gC)"/>
+</svg>

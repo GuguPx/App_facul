@@ -55,12 +55,20 @@ export default function LoginScreen() {
           transition={{ delay: 0.1, duration: 0.5 }}
           className="flex items-center gap-3"
         >
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-            style={{ background: 'rgba(255,255,255,0.2)' }}>
-            <span className="text-xl">🏥</span>
+          <div className="rounded-xl overflow-hidden flex items-center justify-center flex-shrink-0"
+            style={{
+              width: '44px', height: '44px',
+              background: 'white',
+              boxShadow: '0 2px 12px rgba(0,0,0,0.18)',
+            }}>
+            <img
+              src="/logo-conectasus.svg"
+              alt="Conecta SUS"
+              style={{ width: '38px', height: '38px', objectFit: 'contain' }}
+            />
           </div>
           <div>
-            <div className="text-white font-bold text-lg leading-tight">ConectaSUS</div>
+            <div className="text-white font-bold text-lg leading-tight">Conecta SUS</div>
             <div className="text-blue-200 text-xs">Acesso Gov.br</div>
           </div>
         </motion.div>

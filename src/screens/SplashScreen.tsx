@@ -27,21 +27,26 @@ export default function SplashScreen() {
         initial={{ scale: 0.5, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
-        className="flex flex-col items-center gap-6"
+        className="flex flex-col items-center gap-5"
       >
-        {/* Icon */}
+        {/* Logo image */}
         <motion.div
-          initial={{ rotateY: -90 }}
-          animate={{ rotateY: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="w-28 h-28 rounded-3xl flex items-center justify-center"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.6, type: 'spring', stiffness: 200 }}
+          className="rounded-3xl flex items-center justify-center overflow-hidden"
           style={{
-            background: 'rgba(255,255,255,0.15)',
-            border: '2px solid rgba(255,255,255,0.3)',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+            width: '140px',
+            height: '140px',
+            background: 'white',
+            boxShadow: '0 8px 40px rgba(0,0,0,0.3), 0 0 0 3px rgba(255,255,255,0.2)',
           }}
         >
-          <span className="text-6xl">🏥</span>
+          <img
+            src="/logo-conectasus.svg"
+            alt="Conecta SUS"
+            style={{ width: '124px', height: '124px', objectFit: 'contain' }}
+          />
         </motion.div>
 
         {/* Title */}
@@ -52,10 +57,10 @@ export default function SplashScreen() {
           className="text-center"
         >
           <div className="text-white font-bold text-4xl tracking-tight">
-            Conecta<span style={{ color: '#64B5F6' }}>SUS</span>
+            Conecta<span style={{ color: '#4ADE80' }}>SUS</span>
           </div>
-          <div className="text-blue-200 text-sm mt-1 font-medium tracking-widest uppercase">
-            Saúde pública para todos
+          <div className="text-blue-100 text-xs mt-1.5 font-semibold tracking-[0.25em] uppercase">
+            Conectar para Cuidar
           </div>
         </motion.div>
 
@@ -64,16 +69,19 @@ export default function SplashScreen() {
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ delay: 0.8, duration: 0.5 }}
-          className="w-16 h-0.5 rounded-full"
-          style={{ background: 'rgba(255,255,255,0.4)' }}
-        />
+          className="flex items-center gap-2"
+        >
+          <div className="w-10 h-px rounded-full" style={{ background: '#22C55E', opacity: 0.7 }} />
+          <div className="w-1.5 h-1.5 rounded-full bg-white opacity-50" />
+          <div className="w-10 h-px rounded-full" style={{ background: '#42A5F5', opacity: 0.7 }} />
+        </motion.div>
 
         {/* Tagline */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.5 }}
-          className="text-blue-100 text-center text-sm max-w-[220px] leading-relaxed"
+          className="text-blue-100 text-center text-sm max-w-[220px] leading-relaxed opacity-80"
         >
           Sua voz transforma a saúde pública
         </motion.p>

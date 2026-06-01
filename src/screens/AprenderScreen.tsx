@@ -26,7 +26,7 @@ export default function AprenderScreen() {
 
   return (
     <div className="absolute inset-0 flex flex-col bg-gray-50 overflow-hidden">
-      <div style={{ background: 'linear-gradient(135deg, #7C3AED, #5B21B6)' }}>
+      <div style={{ background: 'linear-gradient(135deg, #1565C0, #0D47A1)' }}>
         <StatusBar light />
         <div className="flex items-center gap-3 px-5 pb-5 pt-1">
           <motion.button whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)}
@@ -35,7 +35,7 @@ export default function AprenderScreen() {
           </motion.button>
           <div>
             <h1 className="text-white font-bold text-lg">Aprender sobre o SUS</h1>
-            <p className="text-purple-200 text-xs">Educação em saúde pública</p>
+            <p className="text-blue-200 text-xs">Educação em saúde pública</p>
           </div>
         </div>
       </div>
@@ -53,7 +53,7 @@ export default function AprenderScreen() {
                 <div className="text-gray-400 text-xs">Continue aprendendo!</div>
               </div>
               <div className="text-right">
-                <div className="text-purple-600 font-bold text-2xl">
+                <div className="text-blue-700 font-bold text-2xl">
                   {Math.round(Object.values(progresso).reduce((a, b) => a + b, 0) / Object.keys(progresso).length)}%
                 </div>
                 <div className="text-gray-400 text-xs">concluído</div>
@@ -61,7 +61,7 @@ export default function AprenderScreen() {
             </div>
             <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
               <motion.div className="h-full rounded-full"
-                style={{ background: 'linear-gradient(90deg, #7C3AED, #A78BFA)' }}
+                style={{ background: 'linear-gradient(90deg, #1565C0, #60A5FA)' }}
                 initial={{ width: 0 }}
                 animate={{ width: `${Math.round(Object.values(progresso).reduce((a, b) => a + b, 0) / Object.keys(progresso).length)}%` }}
                 transition={{ duration: 1, delay: 0.3 }}
@@ -289,7 +289,7 @@ export default function AprenderScreen() {
 
               <button onClick={() => { setQuizVisible(false); setQuizAnswer(null); setQuizDone(false); }}
                 className="w-full py-4 rounded-2xl font-bold text-white"
-                style={{ background: 'linear-gradient(135deg, #7C3AED, #5B21B6)' }}>
+                style={{ background: 'linear-gradient(135deg, #1565C0, #0D47A1)' }}>
                 {quizDone ? 'Concluir' : 'Pular'}
               </button>
             </motion.div>

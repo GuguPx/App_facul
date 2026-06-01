@@ -157,13 +157,13 @@ export default function HomeScreen() {
             <motion.div
               variants={fadeUp}
               className="rounded-2xl p-4 mt-2"
-              style={{ background: 'linear-gradient(135deg, #8B5CF6, #6D28D9)' }}
+              style={{ background: 'linear-gradient(135deg, #1565C0, #0D47A1)', boxShadow: '0 4px 20px rgba(21,101,192,0.35)' }}
             >
               <div className="flex items-center gap-3">
                 <span className="text-2xl">💡</span>
                 <div>
                   <div className="text-white font-bold text-sm">Sabia que você pode votar?</div>
-                  <div className="text-purple-200 text-xs mt-0.5">Participe das consultas públicas abertas</div>
+                  <div className="text-blue-200 text-xs mt-0.5">Participe das consultas públicas abertas</div>
                 </div>
                 <button
                   onClick={() => navigate('/consultas')}

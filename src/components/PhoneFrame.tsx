@@ -19,12 +19,11 @@ export default function PhoneFrame({ children }: Props) {
   useEffect(() => () => clearTimeout(shakeTimer.current), []);
 
   return (
-    <div className="flex items-center justify-center min-h-screen w-full"
-      style={{ background: 'radial-gradient(ellipse at 50% 40%, #1a1a3e 0%, #0a0a1a 100%)' }}>
+    <div className="flex items-center justify-center min-h-screen w-full">
 
       {/* Ambient glow */}
-      <div className="absolute w-96 h-96 rounded-full opacity-20 blur-3xl"
-        style={{ background: 'radial-gradient(circle, #1565C0 0%, transparent 70%)' }} />
+      <div className="absolute w-96 h-96 rounded-full opacity-15 blur-3xl pointer-events-none"
+        style={{ background: 'radial-gradient(circle, #1351B4 0%, transparent 70%)' }} />
 
       {/* Phone */}
       <motion.div
@@ -34,31 +33,32 @@ export default function PhoneFrame({ children }: Props) {
         transition={{ duration: 0.45, ease: 'easeInOut' }}
       >
 
-        {/* Outer shell */}
+        {/* Outer shell — silver aluminium */}
         <div className="absolute inset-0 rounded-[52px]"
           style={{
-            background: 'linear-gradient(145deg, #2a2a3e, #1a1a2e)',
+            background: 'linear-gradient(145deg, #E4E8EC 0%, #C8CDD6 50%, #B8BEC8 100%)',
             boxShadow: `
-              0 0 0 1px #333,
-              0 0 0 3px #1a1a2e,
-              0 40px 120px rgba(0,0,0,0.9),
-              0 0 80px rgba(21, 101, 192, 0.15),
-              inset 0 1px 0 rgba(255,255,255,0.05)
+              0 0 0 1px #A8B0BC,
+              0 0 0 3px #D0D5DC,
+              0 40px 120px rgba(0,0,0,0.65),
+              0 0 60px rgba(19, 81, 180, 0.2),
+              inset 0 1px 0 rgba(255,255,255,0.7),
+              inset 0 -1px 0 rgba(0,0,0,0.1)
             `,
           }}
         />
 
-        {/* Side buttons (left) */}
+        {/* Side buttons (left) — silver */}
         <div className="absolute left-[-4px] top-[140px] w-[4px] h-[36px] rounded-l-sm"
-          style={{ background: 'linear-gradient(180deg, #333, #222)' }} />
+          style={{ background: 'linear-gradient(180deg, #C0C5CE, #A8B0BC)' }} />
         <div className="absolute left-[-4px] top-[188px] w-[4px] h-[64px] rounded-l-sm"
-          style={{ background: 'linear-gradient(180deg, #333, #222)' }} />
+          style={{ background: 'linear-gradient(180deg, #C0C5CE, #A8B0BC)' }} />
         <div className="absolute left-[-4px] top-[264px] w-[4px] h-[64px] rounded-l-sm"
-          style={{ background: 'linear-gradient(180deg, #333, #222)' }} />
+          style={{ background: 'linear-gradient(180deg, #C0C5CE, #A8B0BC)' }} />
 
-        {/* Power button (right) */}
+        {/* Power button (right) — silver */}
         <div className="absolute right-[-4px] top-[200px] w-[4px] h-[80px] rounded-r-sm"
-          style={{ background: 'linear-gradient(180deg, #333, #222)' }} />
+          style={{ background: 'linear-gradient(180deg, #C0C5CE, #A8B0BC)' }} />
 
         {/* Screen area */}
         <div className="absolute inset-[3px] rounded-[50px] overflow-hidden bg-white">
@@ -92,12 +92,12 @@ export default function PhoneFrame({ children }: Props) {
 
         {/* Home indicator */}
         <div className="absolute bottom-[10px] left-1/2 -translate-x-1/2 w-32 h-[5px] rounded-full"
-          style={{ background: 'rgba(255,255,255,0.3)' }} />
+          style={{ background: 'rgba(0,0,0,0.18)' }} />
       </motion.div>
 
       {/* Reflection effect */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-20 opacity-10 blur-xl rounded-full"
-        style={{ background: '#1565C0' }} />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-64 h-16 opacity-20 blur-2xl rounded-full pointer-events-none"
+        style={{ background: '#1351B4' }} />
     </div>
   );
 }
