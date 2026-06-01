@@ -4,24 +4,50 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { HiArrowLeft, HiPlay, HiCheckCircle, HiX } from 'react-icons/hi';
 import StatusBar from '../components/StatusBar';
 import BottomNav from '../components/BottomNav';
-import { mockConteudos, mockQuiz } from '../data/mockData';
+import { mockConteudos, mockQuizzes } from '../data/mockData';
 
 export default function AprenderScreen() {
   const navigate = useNavigate();
   const [selected, setSelected] = useState<number | null>(null);
   const [quizVisible, setQuizVisible] = useState(false);
-  const [quizAnswer, setQuizAnswer] = useState<number | null>(null);
-  const [quizDone, setQuizDone] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [answered, setAnswered] = useState(false);
+  const [score, setScore] = useState(0);
+  const [quizFinished, setQuizFinished] = useState(false);
   const [progresso, setProgresso] = useState<Record<number, number>>({
     1: 80, 2: 45, 3: 20, 4: 0,
   });
 
   const detail = mockConteudos.find((c) => c.id === selected);
+  const currentQ = mockQuizzes[currentQuestion];
+  const isLast = currentQuestion === mockQuizzes.length - 1;
+  const pontosGanhos = score * 50;
 
   const handleAnswer = (i: number) => {
-    if (quizDone) return;
-    setQuizAnswer(i);
-    setQuizDone(true);
+    if (answered) return;
+    setSelectedAnswer(i);
+    setAnswered(true);
+    if (i === currentQ.correta) setScore((s) => s + 1);
+  };
+
+  const handleNext = () => {
+    if (!isLast) {
+      setCurrentQuestion((q) => q + 1);
+      setSelectedAnswer(null);
+      setAnswered(false);
+    } else {
+      setQuizFinished(true);
+    }
+  };
+
+  const handleCloseQuiz = () => {
+    setQuizVisible(false);
+    setCurrentQuestion(0);
+    setSelectedAnswer(null);
+    setAnswered(false);
+    setScore(0);
+    setQuizFinished(false);
   };
 
   return (
@@ -129,7 +155,7 @@ export default function AprenderScreen() {
                 <span className="text-3xl">🧠</span>
                 <div>
                   <div className="text-white font-bold text-sm">Teste seus conhecimentos</div>
-                  <div className="text-blue-200 text-xs mt-0.5">1 pergunta • 50 pontos</div>
+                  <div className="text-blue-200 text-xs mt-0.5">6 perguntas • até 300 pontos</div>
                 </div>
                 <div className="ml-auto bg-white/20 rounded-xl px-3 py-1.5 text-white text-xs font-bold">
                   Responder
@@ -230,68 +256,150 @@ export default function AprenderScreen() {
             style={{ background: 'rgba(0,0,0,0.5)' }}
           >
             <motion.div
+              key={quizFinished ? 'finished' : currentQuestion}
               initial={{ y: '100%' }}
               animate={{ y: 0 }}
               exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 28 }}
-              className="bg-white rounded-t-3xl w-full p-6 pb-10"
+              className="bg-white rounded-t-3xl w-full p-6 pb-10 max-h-[90%] overflow-y-auto no-scrollbar"
             >
-              <div className="flex items-center justify-between mb-5">
-                <div>
-                  <div className="text-gray-800 font-bold text-lg">Quiz do SUS</div>
-                  <div className="text-gray-400 text-sm">Pergunta 1 de 1</div>
-                </div>
-                <button onClick={() => { setQuizVisible(false); setQuizAnswer(null); setQuizDone(false); }}>
-                  <HiX size={24} className="text-gray-400" />
-                </button>
-              </div>
-
-              <div className="bg-blue-50 rounded-2xl p-4 mb-5">
-                <p className="text-gray-800 font-semibold text-base">{mockQuiz.pergunta}</p>
-              </div>
-
-              <div className="space-y-3 mb-5">
-                {mockQuiz.opcoes.map((op, i) => {
-                  const isCorrect = i === mockQuiz.correta;
-                  const isSelected = quizAnswer === i;
-                  let bg = 'white';
-                  let border = '#E5E7EB';
-                  let textColor = '#374151';
-                  if (quizDone) {
-                    if (isCorrect) { bg = '#DCFCE7'; border = '#22C55E'; textColor = '#16A34A'; }
-                    else if (isSelected && !isCorrect) { bg = '#FEE2E2'; border = '#EF4444'; textColor = '#DC2626'; }
-                  } else if (isSelected) {
-                    bg = '#EFF6FF'; border = '#1565C0'; textColor = '#1565C0';
-                  }
-                  return (
-                    <motion.button key={i} whileTap={{ scale: 0.97 }}
-                      onClick={() => handleAnswer(i)}
-                      className="w-full text-left px-4 py-3 rounded-2xl border-2 font-medium text-sm transition-all"
-                      style={{ background: bg, borderColor: border, color: textColor }}>
-                      <span className="font-bold mr-2">{['A', 'B', 'C', 'D'][i]}.</span> {op}
-                    </motion.button>
-                  );
-                })}
-              </div>
-
-              <AnimatePresence>
-                {quizDone && (
-                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                    className={`rounded-2xl p-4 mb-4 ${quizAnswer === mockQuiz.correta ? 'bg-green-50' : 'bg-red-50'}`}>
-                    <div className="font-bold text-sm mb-1"
-                      style={{ color: quizAnswer === mockQuiz.correta ? '#16A34A' : '#DC2626' }}>
-                      {quizAnswer === mockQuiz.correta ? '🎉 Correto! +50 pontos' : '❌ Incorreto'}
+              {quizFinished ? (
+                /* ── Tela de resultado final ── */
+                <div className="flex flex-col items-center text-center gap-4 py-2">
+                  <div className="text-5xl">{score >= 5 ? '🏆' : score >= 3 ? '🎯' : '📚'}</div>
+                  <div>
+                    <div className="text-gray-800 font-bold text-xl">
+                      {score >= 5 ? 'Excelente!' : score >= 3 ? 'Bom trabalho!' : 'Continue estudando!'}
                     </div>
-                    <div className="text-gray-600 text-xs">{mockQuiz.explicacao}</div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                    <div className="text-gray-500 text-sm mt-1">
+                      Você acertou <span className="font-bold text-blue-700">{score}</span> de{' '}
+                      <span className="font-bold">{mockQuizzes.length}</span> perguntas
+                    </div>
+                  </div>
 
-              <button onClick={() => { setQuizVisible(false); setQuizAnswer(null); setQuizDone(false); }}
-                className="w-full py-4 rounded-2xl font-bold text-white"
-                style={{ background: 'linear-gradient(135deg, #1565C0, #0D47A1)' }}>
-                {quizDone ? 'Concluir' : 'Pular'}
-              </button>
+                  {/* Score circle */}
+                  <div className="w-24 h-24 rounded-full flex items-center justify-center"
+                    style={{ background: 'linear-gradient(135deg, #1565C0, #0D47A1)' }}>
+                    <div>
+                      <div className="text-white font-bold text-2xl leading-none">{score}/{mockQuizzes.length}</div>
+                      <div className="text-blue-200 text-[10px] text-center">acertos</div>
+                    </div>
+                  </div>
+
+                  {/* Points earned */}
+                  <div className="bg-blue-50 rounded-2xl px-6 py-3 w-full">
+                    <div className="text-blue-800 font-bold text-lg">+{pontosGanhos} pontos</div>
+                    <div className="text-blue-500 text-xs">adicionados ao seu perfil</div>
+                  </div>
+
+                  {/* Per-question summary */}
+                  <div className="w-full space-y-1.5">
+                    {mockQuizzes.map((q, i) => (
+                      <div key={q.id} className="flex items-center gap-2 text-left">
+                        <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 text-[11px] font-bold
+                          ${i < currentQuestion || quizFinished ? 'bg-green-100' : 'bg-gray-100'}`}>
+                          {q.bonus ? '⭐' : i + 1}
+                        </div>
+                        <span className="text-gray-500 text-xs flex-1 truncate">{q.pergunta}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <motion.button whileTap={{ scale: 0.97 }} onClick={handleCloseQuiz}
+                    className="w-full py-4 rounded-2xl font-bold text-white mt-2"
+                    style={{ background: 'linear-gradient(135deg, #1565C0, #0D47A1)' }}>
+                    Concluir
+                  </motion.button>
+                </div>
+              ) : (
+                /* ── Tela de pergunta ── */
+                <>
+                  {/* Header */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <div className="text-gray-800 font-bold text-base">Quiz do SUS</div>
+                        {currentQ.bonus && (
+                          <span className="text-[10px] font-bold bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full">
+                            ⭐ Bônus
+                          </span>
+                        )}
+                      </div>
+                      <div className="text-gray-400 text-xs mt-0.5">
+                        Pergunta {currentQuestion + 1} de {mockQuizzes.length}
+                      </div>
+                    </div>
+                    <button onClick={handleCloseQuiz}>
+                      <HiX size={22} className="text-gray-400" />
+                    </button>
+                  </div>
+
+                  {/* Progress bar */}
+                  <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden mb-5">
+                    <motion.div
+                      className="h-full rounded-full"
+                      style={{ background: 'linear-gradient(90deg, #1565C0, #42A5F5)' }}
+                      initial={{ width: `${(currentQuestion / mockQuizzes.length) * 100}%` }}
+                      animate={{ width: `${((currentQuestion + 1) / mockQuizzes.length) * 100}%` }}
+                      transition={{ duration: 0.4 }}
+                    />
+                  </div>
+
+                  {/* Question */}
+                  <div className="bg-blue-50 rounded-2xl p-4 mb-4">
+                    <p className="text-gray-800 font-semibold text-sm leading-relaxed">{currentQ.pergunta}</p>
+                  </div>
+
+                  {/* Options */}
+                  <div className="space-y-2.5 mb-4">
+                    {currentQ.opcoes.map((op, i) => {
+                      const isCorrect = i === currentQ.correta;
+                      const isSelected = selectedAnswer === i;
+                      let bg = 'white';
+                      let border = '#E5E7EB';
+                      let textColor = '#374151';
+                      if (answered) {
+                        if (isCorrect) { bg = '#DCFCE7'; border = '#22C55E'; textColor = '#16A34A'; }
+                        else if (isSelected) { bg = '#FEE2E2'; border = '#EF4444'; textColor = '#DC2626'; }
+                      } else if (isSelected) {
+                        bg = '#EFF6FF'; border = '#1565C0'; textColor = '#1565C0';
+                      }
+                      return (
+                        <motion.button key={i} whileTap={{ scale: 0.97 }}
+                          onClick={() => handleAnswer(i)}
+                          className="w-full text-left px-4 py-3 rounded-2xl border-2 font-medium text-sm transition-all"
+                          style={{ background: bg, borderColor: border, color: textColor }}>
+                          <span className="font-bold mr-2">{['A', 'B', 'C', 'D'][i]}.</span>{op}
+                        </motion.button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Feedback */}
+                  <AnimatePresence>
+                    {answered && (
+                      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+                        className={`rounded-2xl p-3 mb-4 ${selectedAnswer === currentQ.correta ? 'bg-green-50' : 'bg-red-50'}`}>
+                        <div className="font-bold text-sm mb-0.5"
+                          style={{ color: selectedAnswer === currentQ.correta ? '#16A34A' : '#DC2626' }}>
+                          {selectedAnswer === currentQ.correta ? '🎉 Correto! +50 pontos' : '❌ Incorreto'}
+                        </div>
+                        <div className="text-gray-500 text-xs leading-relaxed">{currentQ.explicacao}</div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Action button */}
+                  <motion.button whileTap={{ scale: 0.97 }}
+                    onClick={answered ? handleNext : handleCloseQuiz}
+                    className="w-full py-4 rounded-2xl font-bold text-white"
+                    style={{ background: 'linear-gradient(135deg, #1565C0, #0D47A1)' }}>
+                    {answered
+                      ? isLast ? 'Ver resultado' : 'Próxima pergunta'
+                      : 'Pular'}
+                  </motion.button>
+                </>
+              )}
             </motion.div>
           </motion.div>
         )}

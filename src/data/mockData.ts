@@ -140,12 +140,76 @@ export const mockConteudos = [
   },
 ];
 
-export const mockQuiz = {
-  pergunta: 'O SUS foi criado em qual ano?',
-  opcoes: ['1980', '1985', '1988', '1990'],
-  correta: 2,
-  explicacao: 'O Sistema Único de Saúde foi criado pela Constituição Federal de 1988, no artigo 196.',
-};
+export const mockQuizzes = [
+  {
+    id: 1,
+    pergunta: 'O que significa a sigla SUS?',
+    opcoes: [
+      'Sistema Unificado de Saúde',
+      'Serviço Único de Saúde',
+      'Sistema Único de Saúde',
+      'Serviço Universal de Saúde',
+    ],
+    correta: 2,
+    explicacao: 'SUS significa Sistema Único de Saúde, garantido pela Constituição Federal de 1988.',
+    bonus: false,
+  },
+  {
+    id: 2,
+    pergunta: 'Qual destes é um princípio do SUS?',
+    opcoes: [
+      'Atendimento apenas para pessoas com carteira assinada',
+      'Universalidade',
+      'Atendimento somente em hospitais públicos',
+      'Cobrança de taxa para consultas',
+    ],
+    correta: 1,
+    explicacao: 'A Universalidade garante que todo cidadão tem direito ao atendimento no SUS, sem discriminação.',
+    bonus: false,
+  },
+  {
+    id: 3,
+    pergunta: 'Qual é a principal função das vacinas?',
+    opcoes: [
+      'Curar doenças já instaladas',
+      'Aumentar a força física',
+      'Prevenir doenças e estimular a imunidade',
+      'Substituir medicamentos',
+    ],
+    correta: 2,
+    explicacao: 'As vacinas ensinam o sistema imunológico a reconhecer e combater patógenos antes de causar doença.',
+    bonus: false,
+  },
+  {
+    id: 4,
+    pergunta: 'Qual profissional de saúde é responsável por diagnosticar e tratar doenças?',
+    opcoes: ['Nutricionista', 'Enfermeiro', 'Fisioterapeuta', 'Médico'],
+    correta: 3,
+    explicacao: 'O médico é o profissional habilitado para diagnosticar doenças e prescrever tratamentos.',
+    bonus: false,
+  },
+  {
+    id: 5,
+    pergunta: 'Qual hábito ajuda a manter uma boa saúde?',
+    opcoes: [
+      'Dormir poucas horas por dia',
+      'Consumir apenas alimentos industrializados',
+      'Praticar atividade física regularmente',
+      'Evitar beber água',
+    ],
+    correta: 2,
+    explicacao: 'A prática regular de atividade física melhora a saúde cardiovascular, mental e a imunidade.',
+    bonus: false,
+  },
+  {
+    id: 6,
+    pergunta: 'Em qual ano o SUS foi criado pela Constituição Federal?',
+    opcoes: ['1985', '1988', '1990', '1992'],
+    correta: 1,
+    explicacao: 'O SUS foi criado pela Constituição Federal de 1988, nos artigos 196 a 200, entrando em vigor com a Lei 8.080/1990.',
+    bonus: true,
+  },
+];
 
 export const mockEnquetes = [
   {
